@@ -30,7 +30,7 @@ struct Contact
 	int size;//记录下一次存放位置
 };
 
-enum Option//枚举提高代码可读性 
+enum Option
 {
 	EXIT,//系统默认从零开始 
 	SHOW,
