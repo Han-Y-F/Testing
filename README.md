@@ -1,7 +1,5 @@
 # define _CRT_SECURE_NO_WARNINGS 1
 
-//# define MAX 1000
-
 # define MAX_NAME 30
 # define MAX_SEX 5
 # define MAX_TELE 20
@@ -11,10 +9,7 @@
 # define DEFAULT_SIZE 3
 
 # include <stdio.h>
-//sizeof函数头文件 
 # include <string.h>
-//molloc函数头文件 
-//#include <molloc.h>
 # include <stdlib.h> 
 
 struct PeoInfo//通讯录中人员信息 
