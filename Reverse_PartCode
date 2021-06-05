@@ -1,0 +1,106 @@
+#include <iostream>
+
+using namespace std;
+
+typedef struct Node {
+	int data;
+	Node* pNext;
+}NODE, * PNODE;
+
+class List {
+public:
+	void Init()
+	{
+		pHead = new NODE;
+		pHead->pNext = NULL;
+		length = 0;
+	}
+
+	void Insert()
+	{
+		PNODE p = pHead;
+
+		for (int i = 1; i <= 5; i++)
+		{
+			PNODE pNew = new NODE;
+			pNew->data = i;
+			p->pNext = pNew;
+			pNew->pNext = NULL;
+			p = pNew;
+			length++;
+		}
+	}
+
+	void Output()
+	{
+		PNODE p = pHead;
+
+		for (int i = 0; i < length; i++)
+		{
+			cout << p->pNext->data << " ";
+			p = p->pNext;
+		}
+		cout << endl;
+	}
+
+	void Reverse_Part(int from,int to);
+
+private:
+	PNODE pHead;
+	int length;
+};
+
+//从form到to这些节点统统反转，PS：反转是后一个指向前一个->即同时控制两个节点
+void List::Reverse_Part(int from, int to)
+{
+	if (from>length || from>to || to>length)
+	{
+		return;
+	}
+
+	PNODE p = pHead;//用于追踪
+	PNODE fPre = NULL;//指向第form-1个节点
+	PNODE tPos = NULL;//指向第to+1个节点
+
+	for (int i = 1; i <= to+1; i++)
+	{
+		p = p->pNext;
+		if (i==from-1)
+		{
+			fPre = p;
+		}
+		tPos = p;
+	}
+
+	p = fPre->pNext;//指向需要反转的第一个（from）节点
+	PNODE cur = p->pNext;//cur指针指向当前要处理的一个节点，即第form+1个节点
+	p->pNext = tPos;//先处理第一个节点的反转（特殊：无法通过循环反转）
+	PNODE q = NULL;//用于暂存cur指针指向节点的下一个节点，防止丢失
+	
+	while (cur!=tPos)
+	{
+		q = cur->pNext;
+		cur->pNext = p;
+		p = cur;
+		cur = q;
+	}
+
+	if (fPre!=NULL)
+	{
+		fPre->pNext = p;
+	}
+}
+
+int main()
+{
+	List list;
+	list.Init();
+	list.Insert();
+	list.Output();
+	int from, to;
+	cout << "请问你想从第几个节点到第几个节点开始反转：";
+	cin >> from >> to;
+	list.Reverse_Part(from, to);
+	list.Output();
+	return 0;
+}
