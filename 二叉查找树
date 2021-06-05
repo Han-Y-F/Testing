@@ -1,3 +1,47 @@
+//头文件
+#pragma once
+#include <iostream>
+
+using namespace std;
+
+typedef struct Node
+{
+	int data;
+	Node* Lchild;
+	Node* Rchild;
+}NODE, * PNODE;
+
+class Bi_FindTree
+{
+public:
+	void Init() //初始化
+	{
+		if (tRoot == NULL)
+		{
+			exit(-1);
+		}
+		tRoot->Lchild = NULL;
+		tRoot->Rchild = NULL;
+
+		cout << "请输入根节点数据：";
+		cin >> tRoot->data;
+		cout << endl;
+	}
+	void Set_Node(PNODE newChild, int n);//添加节点
+	void Delete_Node(PNODE tRoot);//删除
+	PNODE Find(PNODE tRoot, int value);//查找节点，返回指针
+	int Depth_Tree(PNODE tRoot);//求深度
+	void Traverse(PNODE tRoot);//遍历
+	PNODE Get_TreeRoot() const //获取根节点
+	{
+		return tRoot;
+	}
+
+private:
+	const PNODE tRoot = new NODE;//保护根节点不被改变
+};
+
+//主程序
 #include <iostream>
 #include "test.h"
 
