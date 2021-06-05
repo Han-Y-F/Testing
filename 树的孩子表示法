@@ -1,0 +1,60 @@
+#include <iostream>
+using namespace std;
+
+const int MAX_SIZE = 9;
+
+typedef struct Child_Link
+{
+	int child_index;
+	Child_Link* pNext;//指向下一个孩子
+}CHLINK, *PCHLINK;
+
+class Parent_Box
+{
+public:
+	void Init(Parent_Box* TBox)
+	{
+		//输入数据，初始化链表
+		cout << "请输入各树节点的存储内容：";
+		for (int i = 0; i < MAX_SIZE; i++)
+		{
+			cin >> TBox[i].data;
+			TBox[i].fristChild = new CHLINK;
+			TBox[i].fristChild->pNext = NULL;
+		}
+		//设置链表
+		for (int i = 0; i < MAX_SIZE; i++)
+		{
+			int n;
+			cout << "请问第" << i + 1 << "个孩子链表有几个节点：";
+			cin >> n;
+
+			if (n != 0)
+			{
+				PCHLINK temp = TBox[i].fristChild;//指向头结点
+
+				for (int j = 0; j < n; j++)
+				{
+					PCHLINK pNew = new CHLINK;
+					cout << "请输入第" << j + 1 << "个节点的孩子下标：";
+					cin >> pNew->child_index;
+					temp->pNext = pNew;
+					pNew->pNext = NULL;
+					temp = temp->pNext;
+				}
+			}
+			cout << endl;
+		}
+	}
+
+private:
+	char data;
+	PCHLINK fristChild;//指向第一个孩子的头结点
+};
+
+int main()
+{
+	Parent_Box* TBox = new Parent_Box[MAX_SIZE];
+	TBox->Init(TBox);
+	return 0;
+}
